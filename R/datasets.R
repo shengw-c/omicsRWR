@@ -19,15 +19,14 @@
 #' @format a list include whether RWR converges within given iterations, and a vector for the post-scores for each node
 "node10_rwr"
 
-#' Largest connected community from human String database
+#' Normalized adjacency matrix for the largest connected community from human String database
 #'
-#' A igraph object for the largest connected community derived from human String database. The connections were pruned to only retain
-#'  confidence scores greater than 900 (or 0.9).
+#' A sparse matrix for the largest connected community derived from human String database. The connections were pruned to only retain
+#'  confidence scores greater than 900 (or 0.9). The connections were subsequently column-wisely normalized and converted into sparse matrix.
 #'
-#' @format igraph object
+#' @format sparse matrix
 #' @source \url{https://stringdb-downloads.org/}
-"stringdb_human"
-
+"stringdb_human_norm"
 
 #' Example data for RWR input
 #'

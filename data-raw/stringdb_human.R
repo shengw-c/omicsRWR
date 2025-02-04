@@ -19,6 +19,9 @@ net = graph_from_data_frame(sub_stringdb, directed = FALSE) %>% igraph::simplify
 ## keep largest connect community
 stringdb_human = largest_component(net)
 
+## column-wise normalization and convert to sparse matrix
+stringdb_human_norm = norm_W(stringdb_human)
+
 ### proc some file for example RWR input
 testInput = read.table("data-raw/test_input.tsv", sep = "\t", stringsAsFactors = F, header = TRUE) %>%
   rename(score = score_rna) %>% select(gene_name, score)
@@ -27,4 +30,4 @@ testInput = tibble(gene_name = V(stringdb_human)$name) %>%
   left_join(testInput, by = "gene_name", relationship = "one-to-one") %>%
   replace(is.na(.), 0)
 
-usethis::use_data(stringdb_human, testInput, overwrite = TRUE)
+usethis::use_data(stringdb_human_norm, testInput, overwrite = TRUE)
